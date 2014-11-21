@@ -1,12 +1,21 @@
-import 'dart:io';
+import "dart:io";
+import "package:express/express.dart";
 
-main() {
-  HttpServer.bind(InternetAddress.LOOPBACK_IP_V4, 8080)
-      .then((HttpServer server) {
-    print('listening on localhost, port ${server.port}');
-    server.listen((HttpRequest request) {
-      request.response.write('Hello, world!');
-      request.response.close();
+main(){
+  int counter = 0;
+  var app = new Express()
+
+    ..get('/', (ctx){
+      print("root level");
+    })
+
+    ..get('/error', (ctx){
+      throw new ArgumentError("custom error in handler");
+    })
+
+    ..get('/counter', (ctx){
+      ctx.sendJson({'counter': counter++});
     });
-  }).catchError((e) => print(e.toString()));
+
+  app.listen("127.0.0.1", 8000);
 }

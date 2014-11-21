@@ -1,0 +1,7 @@
+name: dartApp
+version: 0.0.1
+author: Alexander Snurnikov <alexander.snurnikov@plottio.com>
+description: Dart REST API
+homepage: https://github.com/admix/dartApp
+dependencies:
+  express: 0.1.6
